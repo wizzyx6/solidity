@@ -16,11 +16,11 @@ contract dyarray{
     }
     
     // function changelength() public{
-    //     grade.length=5;  can't modify length of dynamic array;
+    //     grade.length=5;  //不能用length修改动态数组长度
     // }
     
     function pusharray() public {
-        grade.push(6);
+        grade.push(6); //可以push，但是不能直接赋值
     }
     
     function initbyarray() public {
