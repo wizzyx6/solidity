@@ -1,0 +1,57 @@
+address类型是以uint160存储的
+
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.7;
+
+
+contract addrtest{
+    
+    address public owner=0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;//address默认都是不可以支付的
+    
+     //address payable account1=address(uint160(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4)); //这种address无法强制转换为address payable
+    
+    function addrleng() public view returns(uint160){
+        return uint160(owner);
+    }
+    
+    function pay() public payable{
+        
+    }
+    
+    function getbalance() public view returns(uint){
+        return address(this).balance;
+    }
+    
+    function getthis() public view returns(address){
+        return address(this);//0x5e17b14ADd6c386305A32928F985b29bbA34Eff5
+    }
+    
+    function getobalance(address addr) public view returns(uint){
+        return address(addr).balance/(10**18);
+    }
+    
+    function transferV(address payable addr1) public payable{
+        
+        addr1.transfer(msg.value);//参数直接定义为payable
+    }
+    
+    function transferV2() public payable{
+        
+        address payable addr2=payable(0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2);//这种address通过payable强制转换为address payable
+        
+        addr2.transfer(msg.value);// payable(address) transfer address to address payable!!!
+    }
+    
+    function transferthis() public payable{
+        payable(address(this)).transfer(msg.value);//默认this地址不是payable，需要强制转换
+    }
+    
+    fallback () external payable{
+        
+    }//合约账户转账需要添加fallback和receive匿名函数，并且是external类型
+    
+    receive () external payable{
+        
+    }
+}
