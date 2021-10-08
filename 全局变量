@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.7;
+
+contract global{
+    
+    function sendertest() public view returns(address){
+        return msg.sender;
+    }
+    
+     function senderdiff() public view returns(uint){
+        return block.difficulty;
+    }
+    
+    function sendernum() public view returns(uint){
+        return block.number;
+    }
+    
+    function valuetest() public payable returns(uint){
+        return msg.value;//没有返回值？？
+    }
+    
+    function timetest() public view returns(uint){
+        return block.timestamp;
+    }
+}
