@@ -1,4 +1,4 @@
-address类型是以uint160存储的
+//address类型是以uint160存储的
 
 // SPDX-License-Identifier: GPL-3.0
 
@@ -33,7 +33,7 @@ contract addrtest{
     
     function transferV(address payable addr1) public payable{
         
-        addr1.transfer(msg.value);//参数直接定义为payable
+        addr1.transfer(msg.value);//参数直接定义为payable 如果transfer值大于msg.value，会报错回滚，如果小于，转账transfer的值，多出来的会在合约账户中
     }
     
     function transferV2() public payable{
