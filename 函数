@@ -1,1 +1,30 @@
 函数重名的时候，返回值不同，不能定义，但是如果函数的参数不同可以定义
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.7;
+
+
+contract hanshu{
+
+    address owner;
+
+    constructor () {
+        owner= msg.sender;//0.7版本以上 构造函数不用加public
+    }
+
+    modifier onlyOwner(){
+
+        require(msg.sender==owner);
+        _;
+    }
+
+    function getBalance() view public onlyOwner returns(uint){ //modifier需要加在return前面
+
+        return address(this).balance/(10*10**17);
+    }
+
+
+    function pay() public payable{
+    
+    }
+}
