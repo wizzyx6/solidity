@@ -4,9 +4,9 @@
 pragma solidity >=0.7;
 
 
-contract hanshu{
+contract hanshu{ 
 
-    address owner;
+    address owner; //构造函数初始化
 
     constructor () {
         owner= msg.sender;//0.7版本以上 构造函数不用加public
@@ -18,13 +18,64 @@ contract hanshu{
         _;
     }
 
-    function getBalance() view public onlyOwner returns(uint){ //modifier需要加在return前面
+    function getBalance() view public onlyOwner returns(uint){ 
 
-        return address(this).balance/(10*10**17);
+        return address(this).balance/(10*10**17);//modifier需要加在return前面
     }
 
 
     function pay() public payable{
     
     }
+}
+
+
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.7;
+
+contract modi{
+
+    uint public age=20;
+    uint a=0;
+
+    modifier agerequest(uint _age){
+
+        require(age>_age);  //带参的modifier
+        _;
+    }
+    function child() public agerequest(9) returns(uint){
+        a=10;
+        return a;
+    }
+
+    function adult() public agerequest(17) returns(uint){
+
+        a=18;
+        return a;
+    }
+
+    function geta() view public returns(uint){
+        return a;
+    }
+}
+
+
+contract multimodif{
+    uint public a;
+    modifier mod1{
+        a=1;
+        _;
+        a=2;
+    }
+    modifier mod2{
+        a=3;
+        _;
+        a=4;
+    }
+
+    function test() public mod1 mod2{
+        a=10; //先执行mod2 再执行mod1
+    }
+
 }
