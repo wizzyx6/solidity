@@ -1,0 +1,21 @@
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.7;
+
+contract stor{
+
+    uint public num1=5;
+
+    function test1(uint num2) view public returns(uint){
+
+        num2=num1;
+        return num2;
+    }
+    function test2(uint i) pure public returns(uint,uint){
+
+        uint j=i;
+        i++;
+        return (i,j);//值传递，i改变对j的值没有影响
+     
+    }
+}
