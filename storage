@@ -5,12 +5,14 @@ pragma solidity >=0.7;
 contract stor{
 
     uint public num1=5;
+    uint public x=num1;// test1修改了num1 但是没有x的值没有影响 也是值传递
 
-    function test1(uint num2) view public returns(uint){
+    function test1(uint num2) public returns(uint){
 
-        num2=num1;
+        num1=num2;
         return num2;
     }
+    
     function test2(uint i) pure public returns(uint,uint){
 
         uint j=i;
@@ -18,4 +20,32 @@ contract stor{
         return (i,j);//值传递，i改变对j的值没有影响
      
     }
+}
+
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.7;
+
+contract stor{
+
+    uint public num1=5;
+    uint public x=num1;
+    uint[] public arr1;
+    struct student{
+        string name;
+        uint grade;
+    }
+
+
+    // function changearr(uint[]  arr2) view public returns(uint[]){
+    //     arr2=arr1;
+        
+    //     return arr2;
+    // }
+    function test3() public pure returns(string memory, uint ){ //为什么string要用memory，uint不用
+
+        student memory stu1= student("wizzy",20);
+        return (stu1.name,stu1.grade);
+    }
+//storage和storage之间的传递是指针传递，storage和memory之间是值传递，memory和memory之间是指针传递
 }
